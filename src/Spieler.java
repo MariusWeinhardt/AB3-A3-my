@@ -11,7 +11,6 @@ Spieler(String name){
 	this.name= name;
 	stamm=null;
 	Dinos=null;
-	
 }
 
 public String getName() {
