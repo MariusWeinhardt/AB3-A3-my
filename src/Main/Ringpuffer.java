@@ -1,3 +1,4 @@
+package Main;
 
 public class Ringpuffer {
 Spieler[] spieler;
@@ -18,7 +19,7 @@ int Ende=maxanzahl-1;
 		}
 	}
 	
-	void aktiondurchführen(){
-		
+	public Spieler getSpieler(){
+		return spieler[aktuell];
 	}
 }

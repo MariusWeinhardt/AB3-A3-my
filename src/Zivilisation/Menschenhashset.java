@@ -1,4 +1,10 @@
+package Zivilisation;
 
-public class Menschenhashset {
+import java.util.HashSet;
 
+public class Menschenhashset<Mensch> extends HashSet<Mensch> {
+	
+	
+	
+		
 }

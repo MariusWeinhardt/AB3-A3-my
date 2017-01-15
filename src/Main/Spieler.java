@@ -1,3 +1,4 @@
+package Main;
 import Dinosaurier.Dinosaurier;
 import Zivilisation.Dinoliste;
 import Zivilisation.Stamm;
@@ -32,6 +33,10 @@ public void setStamm(Stamm stamm) {
 //kopiert die Liste bzw greift auf die liste zu
 public void verwalteDinos(){
 	Dinos=this.stamm.getListe();
+}
+
+void aktiondurchführen(){
+	System.out.println("ich "+name+" mach was");
 }
 
 }

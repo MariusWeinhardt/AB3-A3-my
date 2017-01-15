@@ -1,5 +1,3 @@
-
-
 package Zivilisation;
 
 import java.util.LinkedList;
@@ -28,11 +26,12 @@ public class Stamm {
 
 	/** Die ressourcen. */
 	private Ressource[] ressourcen = new Ressource[10];
+	
 	/** Die mitglieder. */
-	private Mensch[] mitglieder = new Mensch[10];
+	private Menschenhashset Hashset = new Menschenhashset() ;
 	
 	/** The liste. */
-	private Dinoliste Liste; 
+	private Dinoliste Liste= new Dinoliste<Dinosaurier>(); 
 
 	/** Die dinos. */
 
@@ -82,23 +81,7 @@ public class Stamm {
 	 */
 	// try catch wenn mensch nicht im array vorkommt
 	public void ausStammEntlassen(Mensch mensch) throws ArrayistLeerException {
-		int zähler = 0;
-		if (mitglieder == null)
-			throw new ArrayistLeerException();
-
-		try {
-			System.out.println("Entlassen");
-			while (mitglieder[zähler] != mensch) {
-				zähler++;
-			}
-			mensch.setStamm(null);
-			for (; zähler < mitglieder.length - 1; zähler++)
-				mitglieder[zähler] = mitglieder[zähler + 1];
-
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println("Mensch ist nicht in diesem Stamm");
-		}
-
+		//entfernenhashset();
 	}
 
 	/**
@@ -111,19 +94,7 @@ public class Stamm {
 	 *             the arrayist voll
 	 */
 	public void mitgliedHinzufuegen(Mensch mensch) throws ArrayistVollException {
-		if (mitglieder[mitglieder.length - 1] != null)
-			throw new ArrayistVollException();
-
-		// array nicht voll und mensch in keinem stamm
-		if (mensch.getStamm() == null) {
-			System.out.println("Mitglied Hinzufügen");
-			int zähler = 0;
-			while (mitglieder[zähler] != null) {
-				zähler++;
-			}
-			mitglieder[zähler] = mensch;
-			mensch.setStamm(this);
-		}
+		//hinzufügenhasset();
 	}
 
 	/**
@@ -174,7 +145,8 @@ public class Stamm {
 	 */
 	// läuft über dinoliste
 	public void verwildern(Dinosaurier dino) {
-		getListe().entfernen(dino);
+		dino.setStamm(null);
+		Liste.remove(dino);
 	}
 
 	/**
@@ -186,9 +158,12 @@ public class Stamm {
 	 *             wenn das Arrayvollist
 	 */
 	public void zaehmen(Dinosaurier dino) {
+		if(dino.getStamm()==null){
+			dino.setStamm(this);
+			Liste.addFirst(dino);
+		}
 		
-		getListe().add(dino);
-
+		
 	}
 
 	/*
@@ -218,11 +193,7 @@ public class Stamm {
 		String ressourcens = "";
 		int zähler = 0;
 
-		while (mitglieder[zähler] != null) {
-			mitglieders = mitglieders + mitglieder[zähler].getName() + " ";
-			zähler++;
-		}
-
+	//mitgliederausgabe
 		zähler = 0;
 		
 		//ausgabe umschreiben
@@ -232,6 +203,10 @@ public class Stamm {
 			zähler++;
 		}
 	*/
+		//listenausgabe dinos
+			System.out.println(Liste.toString());
+	
+		
 		zähler = 0;
 		while (ressourcen[zähler] != null) {
 			ressourcens = ressourcens + ressourcen[zähler].getname() + " " + ressourcen[zähler].getanzahl() + " ";
